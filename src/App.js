@@ -1,6 +1,8 @@
 import styled, { createGlobalStyle } from "styled-components";
 import TelaLogin from "./components/TelaLogin/TelaLogin";
 import TelaCadastro from "./components/TelaCadastro/TelaCadastro";
+import { useState } from "react";
+import TelaUsuarioCadastrado from "./components/TelaUsuarioCadastrado/TelaUsuarioCadastrado.js"
 
 const GlobalStyled = createGlobalStyle`
   *{
@@ -14,14 +16,38 @@ const MainContainer = styled.main`
 `
 
 function App() {
+  const [tela , setTela]= useState(1)
 
-  return (
-    <MainContainer >
+  const trocaTela = (tela)=>{
+    setTela(tela)
+  }
+
+  if (tela ===1){
+    return (
+      <MainContainer >
       <GlobalStyled />
-      <TelaLogin />
-      <TelaCadastro />
-    </MainContainer>
-  );
+      <TelaLogin trocaTela={trocaTela}/>
+      </MainContainer>
+    );
+
+  }else if (tela===2){
+    return(
+    <MainContainer >
+    <GlobalStyled />
+    <TelaCadastro  trocaTela={trocaTela} />
+    </MainContainer>)
+
+  }else {
+    return (
+      <MainContainer >
+      <GlobalStyled />
+      <TelaUsuarioCadastrado trocaTela={trocaTela}/>
+      </MainContainer>
+    );
+
+  }
+
+ 
 }
 
 export default App;
